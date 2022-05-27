@@ -30,8 +30,6 @@
     <p>
         최근 가장 인기 있는 신생 프렌차이즈 업체이다.
     </p>
-    
-만드는대로 팔린다.
 
 <br/>
 
@@ -39,15 +37,13 @@
 
 티라노 사장님은 
 
-점점 늘어가는 지점 갯수를 살펴보다가,
-
 심각한 고민에 빠졌다.
 
 <br/>
 
 그것은 바로
 
-지점의 갯수에 따른 매출수익을 알고 싶어졌던 것이다.
+점점 늘어나는 지점의 갯수에 따른 매출수익을 알고 싶어졌던 것이다.
 
 <br/>
 
@@ -71,14 +67,14 @@
 
 ```python
 branch_num = [24, 29, 31, 32, 33, 34, 34, 35, 35, 36, 37, 37, 37, 37, 38, 38, 38, 38, 38, 38, 38, 38, 39, 39, 40, 40, 40, 41, 41, 42, 43, 43, 43, 43, 44, 44, 46, 48, 50, 51, 52, 52, 53, 53, 55, 55, 55, 56, 56, 56, 56, 58, 59, 59, 59, 60]
-sales = [43, 313, 393, 503, 693, 993, 773, 793, 843, 843, 1093, 1143, 1243, 1293, 1193, 1193, 1293, 1343, 1093, 1293, 1493, 1443, 1493, 1693, 2243, 1443, 1873, 1793, 1963, 2173, 2993, 2593, 2643, 2493, 2493, 2993, 3193, 5133, 5553, 8393, 6843, 6993, 6993, 6893, 8993, 6493, 8193, 8493, 8993, 10143, 8193, 10993, 9993, 10993, 9993, 9993]
+sales_total = [43, 313, 393, 503, 693, 993, 773, 793, 843, 843, 1093, 1143, 1243, 1293, 1193, 1193, 1293, 1343, 1093, 1293, 1493, 1443, 1493, 1693, 2243, 1443, 1873, 1793, 1963, 2173, 2993, 2593, 2643, 2493, 2493, 2993, 3193, 5133, 5553, 8393, 6843, 6993, 6993, 6893, 8993, 6493, 8193, 8493, 8993, 10143, 8193, 10993, 9993, 10993, 9993, 9993]
 ```
 <div>
     <p>
         branch_num은 지점의 갯수를 의미한다고 한다.
     </p>
     <p>
-        sales는 매출액을 의미한다고 한다.
+        sales_total은 매출총액을 의미한다고 한다.
     </p>
 </div>
 
@@ -88,10 +84,10 @@ sales = [43, 313, 393, 503, 693, 993, 773, 793, 843, 843, 1093, 1143, 1243, 1293
 
 <div>
     <p>
-        그런데, 이와 같이 나열되어 있는 데이터는 해석하기가 쉽지 않다.
+        그런데, 이와 같이 나열되어 있는 데이터는 한눈에 살펴보기가 쉽지 않다.
     </p>
     <p>
-        따라서, 이를 시각화하기로 한다.
+        따라서, 이를 산점도 그래프로 시각화하기로 한다.
     </p>
 </div>
 
@@ -99,7 +95,7 @@ sales = [43, 313, 393, 503, 693, 993, 773, 793, 843, 843, 1093, 1143, 1243, 1293
 import matplotlib.pyplot as plt
 
 plt.figure(figsize=(10,8))
-plt.scatter(branch_num, sales)
+plt.scatter(branch_num, sales_total)
 plt.title('Sales by number of branches')
 plt.xlabel('Number of Branch')
 plt.ylabel('Sales Revenue')
@@ -129,7 +125,7 @@ plt.show
 import numpy as np
 
 branch_num_np = np.array(branch_num) 
-sales_np = np.array(sales) 
+sales_total_np = np.array(sales_total) 
 ```
 
 <br/>
@@ -139,7 +135,7 @@ sales_np = np.array(sales)
 ```python
 from sklearn.model_selection import train_test_split
 
-train_input, test_input, train_target, test_target = train_test_split(branch_num_np, sales_np, random_state=42)
+train_input, test_input, train_target, test_target = train_test_split(branch_num_np, sales_total_np, random_state=42)
 ```
 
 <br/>
@@ -150,7 +146,7 @@ train_input, test_input, train_target, test_target = train_test_split(branch_num
 ### 치지 말고 눈으로만 보세요!
 
 print(f'branch_num - num={len(branch_num)}')
-print(f'sales - num={len(sales)}')
+print(f'sales - num={len(sales_total)}')
 print()
 print(f'train_input - num={len(train_input)} %={len(train_input)/len(branch_num)}')
 print(f'train_target - num={len(train_target)} %={len(train_target)/len(branch_num)}')
