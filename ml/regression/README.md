@@ -19,6 +19,60 @@
 - (데이터 시각화) Matplotlib을 사용하여, plot(), scatter() 메소드를 실습한다.
 - (머신러닝) Scikit-Learn의 Linear_model 중 LinearRegression 클래스를 사용하여, fit(), predict(), score() 메소드를 실습한다.
 <br/>
+
+### 코드 요약
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+
+branch_num = [24, 29, 31, 32, 33, 34, 34, 35, 35, 36, 37, 37, 37, 37, 38, 38, 38, 38, 38, 38, 38, 38, 39, 39, 40, 40, 40, 41, 41, 42, 43, 43, 43, 43, 44, 44, 46, 48, 50, 51, 52, 52, 53, 53, 55, 55, 55, 56, 56, 56, 56, 58, 59, 59, 59, 60]
+sales_total = [43, 313, 393, 503, 693, 993, 773, 793, 843, 843, 1093, 1143, 1243, 1293, 1193, 1193, 1293, 1343, 1093, 1293, 1493, 1443, 1493, 1693, 2243, 1443, 1873, 1793, 1963, 2173, 2993, 2593, 2643, 2493, 2493, 2993, 3193, 5133, 5553, 8393, 6843, 6993, 6993, 6893, 8993, 6493, 8193, 8493, 8993, 10143, 8193, 10993, 9993, 10993, 9993, 9993]
+
+
+branch_num_np = np.array(branch_num) 
+sales_total_np = np.array(sales_total) 
+
+
+train_input, test_input, train_target, test_target = train_test_split(branch_num_np, sales_total_np, random_state=42)
+
+
+train_input_reshaped = train_input.reshape(-1,1)
+test_input_reshaped = test_input.reshape(-1,1)
+
+
+train_input_reshaped_polynominal = np.column_stack((train_input_reshaped ** 2, train_input))
+test_input_reshaped_polynominal = np.column_stack((test_input_reshaped ** 2, test_input))
+
+
+lr = LinearRegression()
+lr.fit(train_input_reshaped_polynominal, train_target)
+
+
+plt.figure(figsize=(10,8))
+plt.scatter(train_input_reshaped, train_target)
+
+point = np.arange(30, 70)
+plt.plot(
+    point,
+    (lr.coef_[0]*(point ** 2)) + (lr.coef_[1]*point) + (lr.intercept_)
+)
+plt.scatter(70, lr.predict([[4900, 70]]), marker='^')
+plt.title('Sales by number of branches')
+plt.xlabel('Number of Branch')
+plt.ylabel('Sales Revenue')
+plt.show
+```
+```
+<function matplotlib.pyplot.show(close=None, block=None)>
+```
+![png](output_31_1.png)
+
+<br/>
+<br/>
 <br/>
 
 ## 개요
