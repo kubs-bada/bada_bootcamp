@@ -4,15 +4,20 @@
 
 ### 작성자
 김지욱
+<br/>
 
+### 작성일시
+2022.5.27
+<br/>
+
+### 학습주제
+선형회귀, 다중회귀
 <br/>
 
 ### 학습목표
 - (데이터 전처리) Numpy를 사용하여, array(), column_stack(), arrange() 메소드를 실습한다.
 - (데이터 시각화) Matplotlib을 사용하여, plot(), scatter() 메소드를 실습한다.
 - (머신러닝) Scikit-Learn의 Linear_model 중 LinearRegression 클래스를 사용하여, fit(), predict(), score() 메소드를 실습한다.
-
-
 <br/>
 <br/>
 
@@ -58,12 +63,8 @@
 
 <div>
     <p>
-        우선 티라노 닭강정의 데이터를 살펴보자.
+        우선 아래에 있는 티라노 닭강정의 데이터를 살펴보자.
     </p>
-    
-    branch_num는 지점의 갯수를 의미한다고 한다.
-    
-    sales는 매출액을 의미한다고 한다.
 </div>
 
 
@@ -71,7 +72,27 @@
 branch_num = [24, 29, 31, 32, 33, 34, 34, 35, 35, 36, 37, 37, 37, 37, 38, 38, 38, 38, 38, 38, 38, 38, 39, 39, 40, 40, 40, 41, 41, 42, 43, 43, 43, 43, 44, 44, 46, 48, 50, 51, 52, 52, 53, 53, 55, 55, 55, 56, 56, 56, 56, 58, 59, 59, 59, 60]
 sales = [43, 313, 393, 503, 693, 993, 773, 793, 843, 843, 1093, 1143, 1243, 1293, 1193, 1193, 1293, 1343, 1093, 1293, 1493, 1443, 1493, 1693, 2243, 1443, 1873, 1793, 1963, 2173, 2993, 2593, 2643, 2493, 2493, 2993, 3193, 5133, 5553, 8393, 6843, 6993, 6993, 6893, 8993, 6493, 8193, 8493, 8993, 10143, 8193, 10993, 9993, 10993, 9993, 9993]
 ```
+<div>
+    <p>
+        branch_num은 지점의 갯수를 의미한다고 한다.
+    </p>
+    <p>
+        sales는 매출액을 의미한다고 한다.
+    </p>
+</div>
 
+<br/>
+<br/>
+<br/>
+
+<div>
+    <p>
+        그런데, 이와 같이 나열되어 있는 데이터를 해석하기 쉽지 않다.
+    </p>
+    <p>
+        그리하여 이를 시각화하기로 한다.
+    </p>
+</div>
 
 ```python
 import matplotlib.pyplot as plt
@@ -96,8 +117,11 @@ plt.show
 ![png](output_7_1.png)
     
 
+<br/>
+<br/>
+<br/>
 
-# 데이터 가공하기
+# 데이터 전처리하기
 
 
 ```python
@@ -107,6 +131,9 @@ branch_num_np = np.array(branch_num)
 sales_np = np.array(sales) 
 ```
 
+<br/>
+<br/>
+<br/>
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -114,6 +141,9 @@ from sklearn.model_selection import train_test_split
 train_input, test_input, train_target, test_target = train_test_split(branch_num_np, sales_np, random_state=42)
 ```
 
+<br/>
+<br/>
+<br/>
 
 ```python
 ### 치지 말고 눈으로만 보세요!
@@ -138,6 +168,9 @@ print(f'test_target - num={len(test_target)} %={len(test_target)/len(branch_num)
     test_target - num=14 %=0.25
 
 
+<br/>
+<br/>
+<br/>
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -212,6 +245,9 @@ lr.fit(train_input, train_target)   ### 당연히 에러가 발생합니다. 왜
     Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
 
 
+<br/>
+<br/>
+<br/>
 
 ```python
 # 치지말고 눈으로만 보세요
@@ -223,13 +259,18 @@ print(f'test_input - shape={test_input.shape}')
     train_input - shape=(42,)
     test_input - shape=(14,)
 
-
+<br/>
+<br/>
+<br/>
 
 ```python
 train_input_reshaped = train_input.reshape(-1,1)
 test_input_reshaped = test_input.reshape(-1,1)
 ```
 
+<br/>
+<br/>
+<br/>
 
 ```python
 # 치지말고 눈으로만 보세요
@@ -241,9 +282,16 @@ print(f'test_input - shape={test_input_reshaped.shape}')
     train_input - shape=(42, 1)
     test_input - shape=(14, 1)
 
+<br/>
+<br/>
+<br/>
 
-# 학습하기
+# 머신러닝 학습하기(선형회귀)
 
+
+<br/>
+<br/>
+<br/>
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -260,6 +308,10 @@ lr.fit(train_input_reshaped, train_target)
 
 
 
+<br/>
+<br/>
+<br/>
+
 ```python
 print(f'LinearRegresssion Info - Coefficient={lr.coef_} intercept={lr.intercept_}')
 ```
@@ -268,6 +320,10 @@ print(f'LinearRegresssion Info - Coefficient={lr.coef_} intercept={lr.intercept_
 
 
 
+<br/>
+<br/>
+<br/>
+
 ```python
 print(lr.predict([[70]]))
 ```
@@ -275,6 +331,10 @@ print(lr.predict([[70]]))
     [13967.79487254]
 
 
+
+<br/>
+<br/>
+<br/>
 
 ```python
 plt.figure(figsize=(10,8))
@@ -304,6 +364,10 @@ plt.show
 
 
 
+<br/>
+<br/>
+<br/>
+
 ```python
 lr.score(train_input_reshaped, train_target)
 ```
@@ -316,6 +380,10 @@ lr.score(train_input_reshaped, train_target)
 
 
 
+<br/>
+<br/>
+<br/>
+
 ```python
 lr.score(test_input_reshaped, test_target)
 ```
@@ -327,6 +395,10 @@ lr.score(test_input_reshaped, test_target)
 
 
 
+
+<br/>
+<br/>
+<br/>
 
 ```python
 # 치지말고 눈으로만 보세요!
@@ -359,8 +431,12 @@ print(f'test_input_reshaped - score={round(lr.score(test_input_reshaped, test_ta
     test_input_reshaped - score=0.83
 
 
-# 다중회귀
+# 머신러닝 학습하기(다중회귀)
 
+
+<br/>
+<br/>
+<br/>
 
 ```python
 train_input_reshaped_polynominal = np.column_stack((train_input_reshaped ** 2, train_input))
@@ -416,6 +492,10 @@ train_input_reshaped_polynominal
 
 
 
+<br/>
+<br/>
+<br/>
+
 ```python
 test_input_reshaped_polynominal = np.column_stack((test_input_reshaped ** 2, test_input))
 test_input_reshaped_polynominal
@@ -442,6 +522,10 @@ test_input_reshaped_polynominal
 
 
 
+<br/>
+<br/>
+<br/>
+
 ```python
 print(f'train_input - shape={train_input_reshaped_polynominal.shape}')
 print(f'test_input - shape={test_input_reshaped_polynominal.shape}')
@@ -451,6 +535,10 @@ print(f'test_input - shape={test_input_reshaped_polynominal.shape}')
     test_input - shape=(14, 2)
 
 
+
+<br/>
+<br/>
+<br/>
 
 ```python
 lr = LinearRegression()
@@ -464,6 +552,9 @@ lr.fit(train_input_reshaped_polynominal, train_target)
 
 
 
+<br/>
+<br/>
+<br/>
 
 ```python
 lr.predict([[70**2, 70]])
@@ -476,6 +567,9 @@ lr.predict([[70**2, 70]])
 
 
 
+<br/>
+<br/>
+<br/>
 
 ```python
 print(f'prediction={lr.predict([[70**2, 70]])}')
@@ -486,6 +580,9 @@ print(f'LinearRegresssion Info - Coefficient={lr.coef_} intercept={lr.intercept_
     LinearRegresssion Info - Coefficient=[   9.54067301 -485.62129727] intercept=6072.205188515765
 
 
+<br/>
+<br/>
+<br/>
 
 ```python
 plt.figure(figsize=(10,8))
@@ -514,6 +611,9 @@ plt.show
     
 
 
+<br/>
+<br/>
+<br/>
 
 ```python
 lr.score(train_input_reshaped_polynominal, train_target)
@@ -526,6 +626,9 @@ lr.score(train_input_reshaped_polynominal, train_target)
 
 
 
+<br/>
+<br/>
+<br/>
 
 ```python
 lr.score(test_input_reshaped_polynominal, test_target)
@@ -538,6 +641,9 @@ lr.score(test_input_reshaped_polynominal, test_target)
 
 
 
+<br/>
+<br/>
+<br/>
 
 ```python
 # 치지말고 눈으로만 보세요
