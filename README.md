@@ -23,6 +23,7 @@
 
 ## 개요
 <div align=center>
+    <img src='./trex_chicken.png' width='200'>
     <p>
         티라노 닭강정은
     </p>
@@ -87,10 +88,10 @@ sales = [43, 313, 393, 503, 693, 993, 773, 793, 843, 843, 1093, 1143, 1243, 1293
 
 <div>
     <p>
-        그런데, 이와 같이 나열되어 있는 데이터를 해석하기 쉽지 않다.
+        그런데, 이와 같이 나열되어 있는 데이터는 해석하기가 쉽지 않다.
     </p>
     <p>
-        그리하여 이를 시각화하기로 한다.
+        따라서, 이를 시각화하기로 한다.
     </p>
 </div>
 
@@ -430,6 +431,9 @@ print(f'test_input_reshaped - score={round(lr.score(test_input_reshaped, test_ta
     train_input_reshaped - score=0.94
     test_input_reshaped - score=0.83
 
+<br/>
+<br/>
+<br/>
 
 # 머신러닝 학습하기(다중회귀)
 
